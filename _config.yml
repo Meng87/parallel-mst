@@ -3,4 +3,3 @@ plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 
 title: Parallel MST Algorithm Project
-description: This website aims to document the process of creating an efficient MST algorithm on both GPU and multi-core CPU platforms.
