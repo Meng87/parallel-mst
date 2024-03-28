@@ -1,4 +1,3 @@
-# Parallel MST Algorithms
 ## Summary
 We will create optimized implementations of Minimum Spanning Tree (MST) algorithms on both GPU and multi-core CPU platforms, and perform a detailed analysis of both systems’ performance characteristics. Specifically, we’ll be working with enumerable graphs and exploring using existing MST algorithms such as Prim’s Kruskal’s, Boruvka’s, and their variants.
 
@@ -71,12 +70,12 @@ We’ll use CUDA for data parallelism since this is the mainstream method for co
 Our programming languages will be in C++ to take advantage of its high performance. However, if we decide to explore Graph DSLs such as CUGraph, then we might also need to code in Python. 
 
 ## Schedule
-| Date         | Deliverable                                                            |
+| Date         | Deliverable                                                                        |
 |:-------------|:-----------------------------------------------------------------------------------|
-| April 6      | Initial Fast Sequential MST Implementation + CUDA Approach Complete + Benchmarking |
-| April 13     | Shared Address Space Implementation Complete + Benchmarking                        |
+| April 6      | Initial Fast Sequential MST Implementation, CUDA Approach Complete, Benchmarking   |
+| April 13     | Shared Address Space Implementation Complete, Benchmarking                         |
 | April 16     | Intermediate Milestone: Complete CUDA and OpenMPI approach                         |
-| April 20     | Message Passing Implementation Complete + Benchmarking                             |
-| April 27     | Explore CuGraph + GraphLab                                                         |
+| April 20     | Message Passing Implementation Complete, Benchmarking                              |
+| April 27     | Explore CuGraph and GraphLab                                                       |
 | May 4        | Heterogenous Parallelism Approach Tuning Complete                                  |
 
