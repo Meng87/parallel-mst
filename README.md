@@ -24,9 +24,9 @@ Boruvka’s Algorithm - V vertices, E edges
 
 This algorithm might benefit from parallelism because at many stages of the algorithm, we’re simply operating on a collection of vertices or edges independently of each other before moving to the next stage. Therefore, if the graph is large enough, each of those stages might benefit from parallel computation.
 
-## Challenge
+## The Challenge
 ### Challenge
-The primary challenge of the problem comes from the fact that we need to contract the graph to a smaller graph at each step in the algorithm. Rebuilding the graph is expensive, and we need to find an efficient way to represent the contracted graph (possibly trying out different contraction approaches). Additionally, contracting the graph inherently sequential process. It’s a point of synchronization that limits the amount of parallelism in this problem. If we can find a way to reduce such synchronization (by cutting down the number of rounds of contraction, or not contracting at all), perhaps there are some ways to increase parallelism. 
+The primary challenge of the problem comes from the fact that we need to contract the graph to a smaller graph at each step in the algorithm. Rebuilding the graph is expensive, and we need to find an efficient way to represent the contracted graph (possibly trying out different contraction approaches). Additionally, contracting the graph is an inherently sequential process. It’s a point of synchronization that limits the amount of parallelism in this problem. If we can find a way to reduce such synchronization (by cutting down the number of rounds of contraction, or not contracting at all), perhaps there are some ways to increase parallelism.
 
 ### Workload
 There are dependencies from each step of the algorithm to the next. With Boruvka’s algorithm, the graph needs to be contracted some number of times. The process of contraction is inherently sequential. 
@@ -37,11 +37,11 @@ The algorithm is very memory access driven in that it frequently performs a bulk
 This means that there’s a high communication-to-computation ratio, where the communication here refers to memory accesses. We wouldn’t have many opportunities to do a lot of arithmetic operations after each load or store before we have to do another load or store, which makes taking advantage of locality crucial. 
 
 ### Constraints
-Because our workload is very memory-access driven, this means that the problem is at least constraint by the memory transfer time of the hardware and by how big the cache sizes are. For example, we might choose to map the problem to GPUs or CPUs in very different ways because of how memory is organized when computing with either of those hardware components. 
+Because our workload is very memory-access driven, this means that the problem is at least constrained by the memory transfer time of the hardware and by how big the cache sizes are. For example, we might choose to map the problem to GPUs or CPUs in very different ways because of how memory is organized when computing with either of those hardware components.
 
 ## Resources
 ### Algorithmic Resources
-Given that most MST algorithms are not super long, we’ll start by first writing a fast sequential MST algorithm (most likely using either Kruskal’s or Prim’s), and then we’ll code up a single-threaded version of Boruvka’s from scratch (most likely using Disjoint-Set Union). 
+Given that most MST algorithms are not very long, we’ll start by first writing a fast sequential MST algorithm (most likely using either Kruskal’s or Prim’s), and then we’ll code up a single-threaded version of Boruvka’s from scratch (most likely using Disjoint-Set Union). 
 
 When optimizing our algorithm, we plan to consult several papers in achieving good performance on different platforms. Two examples of papers that we plan to reference are: [A Generic and Highly Efficient Parallel Variant of Boruvka’s Algorithm](https://repositorium.sdum.uminho.pt/bitstream/1822/53008/1/boruvka_uminho_cameraready_v2.pdf) and [A High-Performance MST Implementation for GPUs](https://dl.acm.org/doi/pdf/10.1145/3581784.3607093?casa_token=artP1CPFWiwAAAAA:GUKBstvOEwoOPL3CmVETlCHMB6QMdxnJmDMv6wumH8Th29NIxI_6Y5nv99zW-ba6A-ZPAE-LnGxZlSk). 
 
@@ -61,8 +61,8 @@ We plan to use the GHC machines for coding with GPUs. For CPUs, we plan to use t
 
 ### Hope to Achieve
 1. Explore using Graph DSL to speedup MST 
-    1. CUGraph 
-    2. GraphLab
+    1. [CUGraph](https://github.com/rapidsai/cugraph)
+    2. [GraphLab](https://github.com/lqvito/graphlab)
 2. Explore heterogenous approaches and explore the different thresholds with which different parallelization paradigms are desirable. Ideally, this would involve figuring out the best way to combine message passing and shared address space models or message passing and CUDA and experimentation with problem sizes.
 
 ## Platform Choice
@@ -71,8 +71,8 @@ We’ll use CUDA for data parallelism since this is the mainstream method for co
 Our programming languages will be in C++ to take advantage of its high performance. However, if we decide to explore Graph DSLs such as CUGraph, then we might also need to code in Python. 
 
 ## Schedule
-| Date         | Deliverable          |
-|:-------------|:---------------------|
+| Date         | Deliverable                                                            |
+|:-------------|:-----------------------------------------------------------------------------------|
 | April 6      | Initial Fast Sequential MST Implementation + CUDA Approach Complete + Benchmarking |
 | April 13     | Shared Address Space Implementation Complete + Benchmarking                        |
 | April 16     | Intermediate Milestone: Complete CUDA and OpenMPI approach                         |
