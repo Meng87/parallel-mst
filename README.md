@@ -71,6 +71,8 @@ We’ll use CUDA for data parallelism since this is the mainstream method for co
 Our programming languages will be in C++ to take advantage of its high performance. However, if we decide to explore Graph DSLs such as CUGraph, then we might also need to code in Python. 
 
 ## Schedule
+
+
 | Date         | Deliverable                                                                        |
 |-------------|-------------------------------------------------------------------------------------|
 | April 6      | Initial Fast Sequential MST Implementation + CUDA Approach Complete + Benchmarking |
